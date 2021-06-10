@@ -1,0 +1,1115 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Module 4 exercises},
+  pdfauthor={Filipp Krasovsky},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifluatex
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\title{Module 4 exercises}
+\author{Filipp Krasovsky}
+\date{6/7/2021}
+
+\begin{document}
+\maketitle
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  (15 points) Simulate a single predictor and a nonlinear relationship,
+  such as a sin wave shown in Fig. 7.7 of textbook, and investigate the
+  relationship between the cost, 𝜺, and kernel parameters for a support
+  vector machine model:
+\end{enumerate}
+
+\hypertarget{create-a-grid-of-x-values-to-use-for-prediction-datagrid---data.framex-seq2-10-length-100.}{%
+\subsection{Create a grid of x values to use for prediction
+\textgreater{} dataGrid \textless- data.frame(x = seq(2, 10, length =
+100)).}\label{create-a-grid-of-x-values-to-use-for-prediction-datagrid---data.framex-seq2-10-length-100.}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#training data}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{100}\NormalTok{)}
+\NormalTok{x}\OtherTok{\textless{}{-}}\FunctionTok{runif}\NormalTok{(}\DecValTok{100}\NormalTok{,}\AttributeTok{min=}\DecValTok{2}\NormalTok{,}\AttributeTok{max=}\DecValTok{10}\NormalTok{)}
+\NormalTok{y}\OtherTok{\textless{}{-}}\FunctionTok{sin}\NormalTok{(x)}\SpecialCharTok{+}\FunctionTok{rnorm}\NormalTok{(}\FunctionTok{length}\NormalTok{(x)) }\SpecialCharTok{*} \FloatTok{0.25}
+\NormalTok{sinData}\OtherTok{\textless{}{-}}\FunctionTok{data.frame}\NormalTok{(}\AttributeTok{x=}\NormalTok{x,}\AttributeTok{y=}\NormalTok{y)}
+\FunctionTok{plot}\NormalTok{(x,y,}\AttributeTok{main =} \StringTok{"Training values"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{mod4exercises_files/figure-latex/unnamed-chunk-1-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#prediction data }
+\NormalTok{x\_test }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{x=}\FunctionTok{seq}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{10}\NormalTok{,}\AttributeTok{length=}\DecValTok{100}\NormalTok{))}
+\NormalTok{y\_test }\OtherTok{\textless{}{-}} \FunctionTok{sin}\NormalTok{(x\_test)}\SpecialCharTok{+}\FunctionTok{rnorm}\NormalTok{(}\FunctionTok{length}\NormalTok{(x\_test))}\SpecialCharTok{*} \FloatTok{0.25}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\tightlist
+\item
+  Fit different models using a radial basis function and different
+  values of the cost (the C parameter) and 𝜺. Plot the fitted curve. For
+  example: library(kernlab) rbfSVM \textless- ksvm(x = x, y = y, data =
+  sinData, kernel =``rbfdot'', kpar = ``automatic'', C = 1, epsilon =
+  0.1) modelPrediction \textless- predict(rbfSVM, newdata = dataGrid)
+\end{enumerate}
+
+We start with a cost param of 1 and an epsilon of 0.1.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#use the ksvm model for svm with rbfdot as our kernel method.}
+\FunctionTok{require}\NormalTok{(kernlab)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: kernlab
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'kernlab'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:ggplot2':
+## 
+##     alpha
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{100}\NormalTok{)}
+\NormalTok{svm }\OtherTok{\textless{}{-}} \FunctionTok{ksvm}\NormalTok{(}\AttributeTok{x=}\NormalTok{x,}\AttributeTok{y=}\NormalTok{y,}\AttributeTok{data=}\NormalTok{sinData,}\AttributeTok{kernel=}\StringTok{"rbfdot"}\NormalTok{,}\AttributeTok{kpar=}\StringTok{"automatic"}\NormalTok{,}\AttributeTok{C=}\DecValTok{1}\NormalTok{,}\AttributeTok{epsilon=}\FloatTok{0.1}\NormalTok{)}
+\NormalTok{svm.p}\OtherTok{\textless{}{-}}\FunctionTok{predict}\NormalTok{(svm,}\AttributeTok{newdata=}\NormalTok{x\_test)}
+\FunctionTok{plot}\NormalTok{(}\AttributeTok{x =}\NormalTok{ svm.p, }\AttributeTok{y =}\NormalTok{ y\_test}\SpecialCharTok{$}\NormalTok{x,}\AttributeTok{main=}\FunctionTok{paste}\NormalTok{(}\StringTok{"C: 1, Eps = 0.1, RMSE:"}\NormalTok{,}\FunctionTok{round}\NormalTok{(}\FunctionTok{RMSE}\NormalTok{(svm.p,y\_test}\SpecialCharTok{$}\NormalTok{x),}\DecValTok{3}\NormalTok{)))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{mod4exercises_files/figure-latex/unnamed-chunk-2-1.pdf}
+
+We move on to an epsilon of 0.075 and a cost param of 1:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#use the ksvm model for svm with rbfdot as our kernel method.}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{100}\NormalTok{)}
+\NormalTok{svm }\OtherTok{\textless{}{-}} \FunctionTok{ksvm}\NormalTok{(}\AttributeTok{x=}\NormalTok{x,}\AttributeTok{y=}\NormalTok{y,}\AttributeTok{data=}\NormalTok{sinData,}\AttributeTok{kernel=}\StringTok{"rbfdot"}\NormalTok{,}\AttributeTok{kpar=}\StringTok{"automatic"}\NormalTok{,}\AttributeTok{C=}\DecValTok{1}\NormalTok{,}\AttributeTok{epsilon=}\FloatTok{0.075}\NormalTok{)}
+\NormalTok{svm.p}\OtherTok{\textless{}{-}}\FunctionTok{predict}\NormalTok{(svm,}\AttributeTok{newdata=}\NormalTok{x\_test)}
+\FunctionTok{plot}\NormalTok{(}\AttributeTok{x =}\NormalTok{ svm.p, }\AttributeTok{y =}\NormalTok{ y\_test}\SpecialCharTok{$}\NormalTok{x,}\AttributeTok{main=}\FunctionTok{paste}\NormalTok{(}\StringTok{"C: 1, Eps = 0.075, RMSE:"}\NormalTok{,}\FunctionTok{round}\NormalTok{(}\FunctionTok{RMSE}\NormalTok{(svm.p,y\_test}\SpecialCharTok{$}\NormalTok{x),}\DecValTok{3}\NormalTok{)))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{mod4exercises_files/figure-latex/unnamed-chunk-3-1.pdf}
+It appears decreasing out epsilon slightly drops our performance. We
+move on to an epsilon of 0.125 and a cost param of 1:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#use the ksvm model for svm with rbfdot as our kernel method.}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{100}\NormalTok{)}
+\NormalTok{svm }\OtherTok{\textless{}{-}} \FunctionTok{ksvm}\NormalTok{(}\AttributeTok{x=}\NormalTok{x,}\AttributeTok{y=}\NormalTok{y,}\AttributeTok{data=}\NormalTok{sinData,}\AttributeTok{kernel=}\StringTok{"rbfdot"}\NormalTok{,}\AttributeTok{kpar=}\StringTok{"automatic"}\NormalTok{,}\AttributeTok{C=}\DecValTok{1}\NormalTok{,}\AttributeTok{epsilon=}\FloatTok{0.125}\NormalTok{)}
+\NormalTok{svm.p}\OtherTok{\textless{}{-}}\FunctionTok{predict}\NormalTok{(svm,}\AttributeTok{newdata=}\NormalTok{x\_test)}
+\FunctionTok{plot}\NormalTok{(}\AttributeTok{x =}\NormalTok{ svm.p, }\AttributeTok{y =}\NormalTok{ y\_test}\SpecialCharTok{$}\NormalTok{x,}\AttributeTok{main=}\FunctionTok{paste}\NormalTok{(}\StringTok{"C: 1, Eps = 0.125, RMSE:"}\NormalTok{,}\FunctionTok{round}\NormalTok{(}\FunctionTok{RMSE}\NormalTok{(svm.p,y\_test}\SpecialCharTok{$}\NormalTok{x),}\DecValTok{3}\NormalTok{)))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{mod4exercises_files/figure-latex/unnamed-chunk-4-1.pdf}
+For boundary testing the cost parameter, we can scale C across 0.75 and
+1.25 as an exercise, hosting epsilon constant at 0.1. As an extreme
+boundary, we can set cost to near zero and five as well.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#use the ksvm model for svm with rbfdot as our kernel method.}
+\FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow=}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{))}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{100}\NormalTok{)}
+\NormalTok{svm }\OtherTok{\textless{}{-}} \FunctionTok{ksvm}\NormalTok{(}\AttributeTok{x=}\NormalTok{x,}\AttributeTok{y=}\NormalTok{y,}\AttributeTok{data=}\NormalTok{sinData,}\AttributeTok{kernel=}\StringTok{"rbfdot"}\NormalTok{,}\AttributeTok{kpar=}\StringTok{"automatic"}\NormalTok{,}\AttributeTok{C=}\FloatTok{0.75}\NormalTok{,}\AttributeTok{epsilon=}\FloatTok{0.1}\NormalTok{)}
+\NormalTok{svm.p}\OtherTok{\textless{}{-}}\FunctionTok{predict}\NormalTok{(svm,}\AttributeTok{newdata=}\NormalTok{x\_test)}
+\FunctionTok{plot}\NormalTok{(}\AttributeTok{x =}\NormalTok{ svm.p, }\AttributeTok{y =}\NormalTok{ y\_test}\SpecialCharTok{$}\NormalTok{x,}\AttributeTok{main=}\FunctionTok{paste}\NormalTok{(}\StringTok{"C: 0.75, Eps = 0.1, RMSE:"}\NormalTok{,}\FunctionTok{round}\NormalTok{(}\FunctionTok{RMSE}\NormalTok{(svm.p,y\_test}\SpecialCharTok{$}\NormalTok{x),}\DecValTok{3}\NormalTok{)))}
+
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{100}\NormalTok{)}
+\NormalTok{svm }\OtherTok{\textless{}{-}} \FunctionTok{ksvm}\NormalTok{(}\AttributeTok{x=}\NormalTok{x,}\AttributeTok{y=}\NormalTok{y,}\AttributeTok{data=}\NormalTok{sinData,}\AttributeTok{kernel=}\StringTok{"rbfdot"}\NormalTok{,}\AttributeTok{kpar=}\StringTok{"automatic"}\NormalTok{,}\AttributeTok{C=}\FloatTok{1.25}\NormalTok{,}\AttributeTok{epsilon=}\FloatTok{0.1}\NormalTok{)}
+\NormalTok{svm.p}\OtherTok{\textless{}{-}}\FunctionTok{predict}\NormalTok{(svm,}\AttributeTok{newdata=}\NormalTok{x\_test)}
+\FunctionTok{plot}\NormalTok{(}\AttributeTok{x =}\NormalTok{ svm.p, }\AttributeTok{y =}\NormalTok{ y\_test}\SpecialCharTok{$}\NormalTok{x,}\AttributeTok{main=}\FunctionTok{paste}\NormalTok{(}\StringTok{"C: 1.25, Eps = 0.1, RMSE:"}\NormalTok{,}\FunctionTok{round}\NormalTok{(}\FunctionTok{RMSE}\NormalTok{(svm.p,y\_test}\SpecialCharTok{$}\NormalTok{x),}\DecValTok{3}\NormalTok{)))}
+
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{100}\NormalTok{)}
+\NormalTok{svm }\OtherTok{\textless{}{-}} \FunctionTok{ksvm}\NormalTok{(}\AttributeTok{x=}\NormalTok{x,}\AttributeTok{y=}\NormalTok{y,}\AttributeTok{data=}\NormalTok{sinData,}\AttributeTok{kernel=}\StringTok{"rbfdot"}\NormalTok{,}\AttributeTok{kpar=}\StringTok{"automatic"}\NormalTok{,}\AttributeTok{C=}\FloatTok{0.001}\NormalTok{,}\AttributeTok{epsilon=}\FloatTok{0.1}\NormalTok{)}
+\NormalTok{svm.p}\OtherTok{\textless{}{-}}\FunctionTok{predict}\NormalTok{(svm,}\AttributeTok{newdata=}\NormalTok{x\_test)}
+\FunctionTok{plot}\NormalTok{(}\AttributeTok{x =}\NormalTok{ svm.p, }\AttributeTok{y =}\NormalTok{ y\_test}\SpecialCharTok{$}\NormalTok{x,}\AttributeTok{main=}\FunctionTok{paste}\NormalTok{(}\StringTok{"C: \textasciitilde{}0, Eps = 0.1, RMSE:"}\NormalTok{,}\FunctionTok{round}\NormalTok{(}\FunctionTok{RMSE}\NormalTok{(svm.p,y\_test}\SpecialCharTok{$}\NormalTok{x),}\DecValTok{3}\NormalTok{)))}
+
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{100}\NormalTok{)}
+\NormalTok{svm }\OtherTok{\textless{}{-}} \FunctionTok{ksvm}\NormalTok{(}\AttributeTok{x=}\NormalTok{x,}\AttributeTok{y=}\NormalTok{y,}\AttributeTok{data=}\NormalTok{sinData,}\AttributeTok{kernel=}\StringTok{"rbfdot"}\NormalTok{,}\AttributeTok{kpar=}\StringTok{"automatic"}\NormalTok{,}\AttributeTok{C=}\DecValTok{5}\NormalTok{,}\AttributeTok{epsilon=}\FloatTok{0.1}\NormalTok{)}
+\NormalTok{svm.p}\OtherTok{\textless{}{-}}\FunctionTok{predict}\NormalTok{(svm,}\AttributeTok{newdata=}\NormalTok{x\_test)}
+\FunctionTok{plot}\NormalTok{(}\AttributeTok{x =}\NormalTok{ svm.p, }\AttributeTok{y =}\NormalTok{ y\_test}\SpecialCharTok{$}\NormalTok{x,}\AttributeTok{main=}\FunctionTok{paste}\NormalTok{(}\StringTok{"C: 5, Eps = 0.1, RMSE:"}\NormalTok{,}\FunctionTok{round}\NormalTok{(}\FunctionTok{RMSE}\NormalTok{(svm.p,y\_test}\SpecialCharTok{$}\NormalTok{x),}\DecValTok{3}\NormalTok{)))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{mod4exercises_files/figure-latex/unnamed-chunk-5-1.pdf}
+On face value, it appears that increasing the cost parameter is
+associated with an increase in RMSE, with diminishing marginal returns.
+Near zero cost parameters induce a much larger RMSE, while higher
+C-values decrease performance as well.
+
+\begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  The σ parameter can be adjusted using the kpar argument, such as kpar
+  = list(sigma = 1). Try different values of σ to understand how this
+  parameter changes the model fit. How do the cost, 𝜺, and σ values
+  affect the model?
+\end{enumerate}
+
+We know, as a rule, that higher values of sigma make the model more
+flexible because errors tend to get amplified, but lower values make the
+model ``stiffen'', leading to underfitting.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sigma\_frame }\OtherTok{=} \FunctionTok{seq}\NormalTok{(}\AttributeTok{from =} \FloatTok{0.1}\NormalTok{, }\AttributeTok{to =} \DecValTok{4}\NormalTok{, }\AttributeTok{by =} \FloatTok{0.1}\NormalTok{)}
+\NormalTok{results }\OtherTok{=} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{Sigma=}\FunctionTok{character}\NormalTok{(),}\AttributeTok{RMSE=}\FunctionTok{double}\NormalTok{())}
+
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in}\NormalTok{ sigma\_frame)\{}
+  \FunctionTok{set.seed}\NormalTok{(}\DecValTok{100}\NormalTok{)}
+\NormalTok{  svm }\OtherTok{\textless{}{-}} \FunctionTok{ksvm}\NormalTok{(}\AttributeTok{x=}\NormalTok{x,}\AttributeTok{y=}\NormalTok{y,}\AttributeTok{data=}\NormalTok{sinData,}\AttributeTok{kernel=}\StringTok{"rbfdot"}\NormalTok{,}\AttributeTok{kpar=}\FunctionTok{list}\NormalTok{(}\AttributeTok{sigma=}\NormalTok{i),}\AttributeTok{C=}\DecValTok{1}\NormalTok{,}\AttributeTok{epsilon=}\FloatTok{0.1}\NormalTok{)}
+\NormalTok{  svm.p}\OtherTok{\textless{}{-}}\FunctionTok{predict}\NormalTok{(svm,}\AttributeTok{newdata=}\NormalTok{x\_test)}
+\NormalTok{  this.result }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(i,}\FunctionTok{RMSE}\NormalTok{(svm.p,y\_test}\SpecialCharTok{$}\NormalTok{x))}
+\NormalTok{  results }\OtherTok{=} \FunctionTok{rbind}\NormalTok{(results,this.result)}
+\NormalTok{\}}
+
+\FunctionTok{names}\NormalTok{(results) }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\StringTok{"Sigma"}\NormalTok{,}\StringTok{"RMSE"}\NormalTok{)}
+
+\FunctionTok{plot}\NormalTok{(results,}\AttributeTok{type=}\StringTok{"o"}\NormalTok{,}\AttributeTok{main=}\StringTok{"Sigma vs. RMSE"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{mod4exercises_files/figure-latex/unnamed-chunk-6-1.pdf}
+Overall, it seems that increasing sigma beyond 1 tends to produce an
+increase in error rates,with the optimal value lying between zero and
+one. Similarly, increasing the epsilon parameter increases the threshold
+at which data points become relevant to modeling given that SVM is
+epsilon-insensitive. Using an epsilon that is too high makes the model
+dependent on points with radically low fit, this failing to generalize
+to outside data.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  (15 points) For the Tecator data described in chapter 6 of the
+  textbook, build SVM, neural network, MARS, and KNN models. Since
+  neural networks are especially sensitive to highly correlated
+  predictors, does pre-processing using PCA help the model? For this
+  problem, you will perform your analysis in R.
+\end{enumerate}
+
+Because the textbook frames the data question as modeling the
+relationship to fat, we use column 2 of the endpoints set.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#load data {-} absorp is the predictor set and endpoints are the response set(s).}
+\FunctionTok{library}\NormalTok{(caret)}
+\FunctionTok{data}\NormalTok{(tecator)}
+\FunctionTok{require}\NormalTok{(nnet)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: nnet
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{require}\NormalTok{(earth)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: earth
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: package 'earth' was built under R version 4.0.5
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: Formula
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: plotmo
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: package 'plotmo' was built under R version 4.0.5
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: plotrix
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: TeachingDemos
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: package 'TeachingDemos' was built under R version 4.0.5
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#without PCA }
+\NormalTok{x }\OtherTok{=} \FunctionTok{as.data.frame}\NormalTok{(absorp)}
+\NormalTok{y }\OtherTok{=} \FunctionTok{as.data.frame}\NormalTok{(endpoints[,}\DecValTok{2}\NormalTok{])}
+\NormalTok{x.p }\OtherTok{=} \FunctionTok{preProcess}\NormalTok{(x,}\AttributeTok{method =} \FunctionTok{c}\NormalTok{(}\StringTok{"center"}\NormalTok{,}\StringTok{"scale"}\NormalTok{))}
+\NormalTok{x }\OtherTok{=} \FunctionTok{predict}\NormalTok{(x.p,x)}
+
+\FunctionTok{names}\NormalTok{(y) }\OtherTok{=} \StringTok{\textquotesingle{}fat\textquotesingle{}}
+
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\NormalTok{trainingRows }\OtherTok{\textless{}{-}} \FunctionTok{createDataPartition}\NormalTok{(y}\SpecialCharTok{$}\NormalTok{fat,}\AttributeTok{p =} \FloatTok{0.80}\NormalTok{, }\AttributeTok{list=}\ConstantTok{FALSE}\NormalTok{)}
+
+\NormalTok{trainx}\OtherTok{\textless{}{-}}\NormalTok{ x[trainingRows,]}
+\NormalTok{trainy}\OtherTok{\textless{}{-}}\NormalTok{ y[trainingRows,]}
+\NormalTok{testx }\OtherTok{\textless{}{-}}\NormalTok{ x[}\SpecialCharTok{{-}}\NormalTok{trainingRows,]}
+\NormalTok{testy }\OtherTok{\textless{}{-}}\NormalTok{ y[}\SpecialCharTok{{-}}\NormalTok{trainingRows,]}
+
+
+
+\CommentTok{\#SVM}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{100}\NormalTok{)}
+\NormalTok{svmRtuned }\OtherTok{\textless{}{-}} \FunctionTok{train}\NormalTok{((trainx),(trainy),}\AttributeTok{method=}\StringTok{"svmRadial"}\NormalTok{,}\AttributeTok{preProc =} \FunctionTok{c}\NormalTok{(}\StringTok{"center"}\NormalTok{,}\StringTok{"scale"}\NormalTok{),}\AttributeTok{tunelength=}\DecValTok{14}\NormalTok{,}
+                   \AttributeTok{trControl =} \FunctionTok{trainControl}\NormalTok{(}\AttributeTok{method=}\StringTok{"cv"}\NormalTok{))}
+\NormalTok{svm.p }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(svmRtuned}\SpecialCharTok{$}\NormalTok{finalModel,testx)}
+\NormalTok{svm.rmse}\OtherTok{\textless{}{-}}\FunctionTok{RMSE}\NormalTok{(svm.p,testy)}
+\FunctionTok{print}\NormalTok{(}\FunctionTok{paste}\NormalTok{(}\StringTok{"SVM"}\NormalTok{,svm.rmse))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "SVM 6.55562134092721"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#NN}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{100}\NormalTok{)}
+\NormalTok{nnet }\OtherTok{\textless{}{-}} \FunctionTok{avNNet}\NormalTok{(trainx,trainy,}\AttributeTok{size=}\DecValTok{5}\NormalTok{,}\AttributeTok{decay=}\FloatTok{0.01}\NormalTok{,}\AttributeTok{repeats=}\DecValTok{5}\NormalTok{,}\AttributeTok{linout=}\ConstantTok{TRUE}\NormalTok{,}\AttributeTok{trace=}\ConstantTok{FALSE}\NormalTok{,}\AttributeTok{maxit=}\DecValTok{500}\NormalTok{,}\AttributeTok{maxNwts=}\DecValTok{5}\SpecialCharTok{*}\NormalTok{(}\FunctionTok{ncol}\NormalTok{(trainx)}\SpecialCharTok{+}\DecValTok{1}\NormalTok{)}\SpecialCharTok{+}\DecValTok{5}\SpecialCharTok{+}\DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: executing %dopar% sequentially: no parallel backend registered
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{nnet.p}\OtherTok{\textless{}{-}}\FunctionTok{predict}\NormalTok{(nnet,testx)}
+\NormalTok{nnet.rmse}\OtherTok{\textless{}{-}}\FunctionTok{RMSE}\NormalTok{(nnet.p,testy)}
+\FunctionTok{print}\NormalTok{(}\FunctionTok{paste}\NormalTok{(}\StringTok{"nnet"}\NormalTok{,nnet.rmse))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "nnet 0.37990906080454"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#MARS}
+\NormalTok{marsgrid }\OtherTok{\textless{}{-}} \FunctionTok{expand.grid}\NormalTok{(}\AttributeTok{.degree=}\DecValTok{1}\SpecialCharTok{:}\DecValTok{2}\NormalTok{,}\AttributeTok{.nprune=}\DecValTok{2}\SpecialCharTok{:}\DecValTok{38}\NormalTok{)}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{100}\NormalTok{)}
+\NormalTok{mars.t }\OtherTok{\textless{}{-}} \FunctionTok{train}\NormalTok{(trainx,trainy,}\AttributeTok{method=}\StringTok{"earth"}\NormalTok{,}\AttributeTok{tuneGrid=}\NormalTok{marsgrid,}\AttributeTok{trControl=}\FunctionTok{trainControl}\NormalTok{(}\AttributeTok{method=}\StringTok{"cv"}\NormalTok{))}
+\NormalTok{mars.p }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(mars.t,testx)}
+\NormalTok{mars.rmse}\OtherTok{\textless{}{-}}\FunctionTok{RMSE}\NormalTok{(mars.p,testy)}
+\FunctionTok{print}\NormalTok{(}\FunctionTok{paste}\NormalTok{(}\StringTok{"MARS"}\NormalTok{,mars.rmse))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "MARS 1.78792232873288"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#KNN {-} remove unbalanced first.}
+\NormalTok{knnDescr }\OtherTok{\textless{}{-}}\NormalTok{ trainx[,}\SpecialCharTok{{-}}\FunctionTok{nearZeroVar}\NormalTok{(trainx)]}
+\NormalTok{knntune  }\OtherTok{\textless{}{-}} \FunctionTok{train}\NormalTok{(knnDescr,trainy,}\AttributeTok{method=}\StringTok{"knn"}\NormalTok{,}\AttributeTok{tuneGrid=}\FunctionTok{data.frame}\NormalTok{(}\AttributeTok{.k=}\DecValTok{1}\SpecialCharTok{:}\DecValTok{20}\NormalTok{),}\AttributeTok{trControl=}\FunctionTok{trainControl}\NormalTok{(}\AttributeTok{method=}\StringTok{"cv"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in nominalTrainWorkflow(x = x, y = y, wts = weights, info = trainInfo, :
+## There were missing values in resampled performance measures.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{knn.p }\OtherTok{\textless{}{-}}\FunctionTok{predict}\NormalTok{(knntune,testx)}
+\NormalTok{knn.rmse}\OtherTok{\textless{}{-}}\FunctionTok{RMSE}\NormalTok{(knn.p,testy)}
+\FunctionTok{print}\NormalTok{(}\FunctionTok{paste}\NormalTok{(}\StringTok{"KNN"}\NormalTok{,knn.rmse))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "KNN 12.4431471959476"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#NN with PCA }
+\NormalTok{x }\OtherTok{=} \FunctionTok{as.data.frame}\NormalTok{(absorp)}
+\NormalTok{y }\OtherTok{=} \FunctionTok{as.data.frame}\NormalTok{(endpoints[,}\DecValTok{2}\NormalTok{])}
+\NormalTok{x.p }\OtherTok{=} \FunctionTok{preProcess}\NormalTok{(x,}\AttributeTok{method =} \FunctionTok{c}\NormalTok{(}\StringTok{"center"}\NormalTok{,}\StringTok{"scale"}\NormalTok{,}\StringTok{"pca"}\NormalTok{))}
+\NormalTok{x }\OtherTok{=} \FunctionTok{predict}\NormalTok{(x.p,x)}
+
+\FunctionTok{names}\NormalTok{(y) }\OtherTok{=} \StringTok{\textquotesingle{}fat\textquotesingle{}}
+
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\NormalTok{trainingRows }\OtherTok{\textless{}{-}} \FunctionTok{createDataPartition}\NormalTok{(y}\SpecialCharTok{$}\NormalTok{fat,}\AttributeTok{p =} \FloatTok{0.80}\NormalTok{, }\AttributeTok{list=}\ConstantTok{FALSE}\NormalTok{)}
+
+\NormalTok{trainx}\OtherTok{\textless{}{-}}\NormalTok{ x[trainingRows,]}
+\NormalTok{trainy}\OtherTok{\textless{}{-}}\NormalTok{ y[trainingRows,]}
+\NormalTok{testx }\OtherTok{\textless{}{-}}\NormalTok{ x[}\SpecialCharTok{{-}}\NormalTok{trainingRows,]}
+\NormalTok{testy }\OtherTok{\textless{}{-}}\NormalTok{ y[}\SpecialCharTok{{-}}\NormalTok{trainingRows,]}
+
+\CommentTok{\#NN}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{100}\NormalTok{)}
+\NormalTok{nnet }\OtherTok{\textless{}{-}} \FunctionTok{avNNet}\NormalTok{(trainx,trainy,}\AttributeTok{size=}\DecValTok{5}\NormalTok{,}\AttributeTok{decay=}\FloatTok{0.01}\NormalTok{,}\AttributeTok{repeats=}\DecValTok{5}\NormalTok{,}\AttributeTok{linout=}\ConstantTok{TRUE}\NormalTok{,}\AttributeTok{trace=}\ConstantTok{FALSE}\NormalTok{,}\AttributeTok{maxit=}\DecValTok{500}\NormalTok{,}\AttributeTok{maxNwts=}\DecValTok{5}\SpecialCharTok{*}\NormalTok{(}\FunctionTok{ncol}\NormalTok{(trainx)}\SpecialCharTok{+}\DecValTok{1}\NormalTok{)}\SpecialCharTok{+}\DecValTok{5}\SpecialCharTok{+}\DecValTok{1}\NormalTok{)}
+\NormalTok{nnet.p}\OtherTok{\textless{}{-}}\FunctionTok{predict}\NormalTok{(nnet,testx)}
+\NormalTok{nnet.rmse}\OtherTok{\textless{}{-}}\FunctionTok{RMSE}\NormalTok{(nnet.p,testy)}
+\FunctionTok{print}\NormalTok{(}\FunctionTok{paste}\NormalTok{(}\StringTok{"nnet w PCA"}\NormalTok{,nnet.rmse))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "nnet w PCA 11.1405942861103"
+\end{verbatim}
+
+PCA failed to improve our neural net.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  The matrix processPredictors contains the 57 predictors (12 describing
+  the input biological material and 45 describing the process
+  predictors) for the 176 manufacturing runs. yield contains the percent
+  yield for each run. This describes the data for a chemical
+  manufacturing process. Use data imputation, data splitting, and
+  pre-processing steps and train several nonlinear regression models.
+\end{enumerate}
+
+\begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Which predictors are most important in the optimal nonlinear
+  regression model? Do either the biological or process variables
+  dominate the list? How do the top ten important predictors compare to
+  the top ten predictors from the optimal linear model?
+\item
+  Explore the relationships between the top predictors and the response
+  for the predictors that are unique to the optimal nonlinear regression
+  model. Do these plots reveal intuition about the biological or process
+  predictors and their relationship with yield?
+\end{enumerate}
+
+For this problem, you will perform your analysis in R.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#load data}
+\FunctionTok{library}\NormalTok{(AppliedPredictiveModeling)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'AppliedPredictiveModeling' was built under R version 4.0.5
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{data}\NormalTok{(ChemicalManufacturingProcess)}
+
+\CommentTok{\#knn imputation}
+\FunctionTok{require}\NormalTok{(Hmisc)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: Hmisc
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: package 'Hmisc' was built under R version 4.0.5
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: survival
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'survival'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:caret':
+## 
+##     cluster
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'Hmisc'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:TeachingDemos':
+## 
+##     cnvrt.coords, subplot
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:dplyr':
+## 
+##     src, summarize
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:base':
+## 
+##     format.pval, units
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{=}\NormalTok{ (ChemicalManufacturingProcess)}
+\NormalTok{x }\OtherTok{=} \FunctionTok{subset}\NormalTok{(x,}\AttributeTok{select=}\SpecialCharTok{{-}}\FunctionTok{c}\NormalTok{(Yield))}
+\NormalTok{x }\OtherTok{=} \FunctionTok{as.data.frame}\NormalTok{(x)}
+\NormalTok{x }\OtherTok{=}\NormalTok{ Hmisc}\SpecialCharTok{::}\FunctionTok{impute}\NormalTok{(x)}
+\NormalTok{y  }\OtherTok{\textless{}{-}}\NormalTok{ChemicalManufacturingProcess}\SpecialCharTok{$}\NormalTok{Yield }\SpecialCharTok{\%\textgreater{}\%}\NormalTok{ as.data.frame }
+
+\CommentTok{\#remove nzv }
+\NormalTok{nzv }\OtherTok{=} \FunctionTok{nearZeroVar}\NormalTok{(x)}
+\NormalTok{x }\OtherTok{=}\NormalTok{ x[}\SpecialCharTok{{-}}\NormalTok{nzv]}
+
+\CommentTok{\#center, scale }
+\NormalTok{x.cs }\OtherTok{\textless{}{-}} \FunctionTok{preProcess}\NormalTok{(x,}\AttributeTok{method=}\FunctionTok{c}\NormalTok{(}\StringTok{"center"}\NormalTok{,}\StringTok{"scale"}\NormalTok{))}
+\NormalTok{x }\OtherTok{=} \FunctionTok{predict}\NormalTok{(x.cs,x)}
+
+\CommentTok{\#partition}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\FunctionTok{names}\NormalTok{(y)}\OtherTok{=}\StringTok{"yield"}
+\NormalTok{trainingRows }\OtherTok{\textless{}{-}} \FunctionTok{createDataPartition}\NormalTok{(y}\SpecialCharTok{$}\NormalTok{yield,}\AttributeTok{p =} \FloatTok{0.80}\NormalTok{, }\AttributeTok{list=}\ConstantTok{FALSE}\NormalTok{)}
+
+\NormalTok{trainx}\OtherTok{\textless{}{-}}\NormalTok{ x[trainingRows,]}
+\NormalTok{trainy}\OtherTok{\textless{}{-}}\NormalTok{ y[trainingRows,]}
+\NormalTok{testx }\OtherTok{\textless{}{-}}\NormalTok{ x[}\SpecialCharTok{{-}}\NormalTok{trainingRows,]}
+\NormalTok{testy }\OtherTok{\textless{}{-}}\NormalTok{ y[}\SpecialCharTok{{-}}\NormalTok{trainingRows,]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\tightlist
+\item
+  Which nonlinear regression model gives the optimal resampling and test
+  set performance? For this instance, we will use svm, nnet, and mars.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#SVM}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{100}\NormalTok{)}
+\NormalTok{svmRtuned }\OtherTok{\textless{}{-}} \FunctionTok{train}\NormalTok{((trainx),(trainy),}\AttributeTok{method=}\StringTok{"svmRadial"}\NormalTok{,}\AttributeTok{preProc =} \FunctionTok{c}\NormalTok{(}\StringTok{"center"}\NormalTok{,}\StringTok{"scale"}\NormalTok{),}\AttributeTok{tunelength=}\DecValTok{14}\NormalTok{,}
+                   \AttributeTok{trControl =} \FunctionTok{trainControl}\NormalTok{(}\AttributeTok{method=}\StringTok{"cv"}\NormalTok{))}
+\NormalTok{svm.p }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(svmRtuned}\SpecialCharTok{$}\NormalTok{finalModel,testx)}
+\NormalTok{svm.rmse}\OtherTok{\textless{}{-}}\FunctionTok{RMSE}\NormalTok{(svm.p,testy)}
+
+\CommentTok{\#NN}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{100}\NormalTok{)}
+\NormalTok{nnet }\OtherTok{\textless{}{-}} \FunctionTok{avNNet}\NormalTok{(trainx,trainy,}\AttributeTok{size=}\DecValTok{5}\NormalTok{,}\AttributeTok{decay=}\FloatTok{0.01}\NormalTok{,}\AttributeTok{repeats=}\DecValTok{5}\NormalTok{,}\AttributeTok{linout=}\ConstantTok{TRUE}\NormalTok{,}\AttributeTok{trace=}\ConstantTok{FALSE}\NormalTok{,}\AttributeTok{maxit=}\DecValTok{500}\NormalTok{,}\AttributeTok{maxNwts=}\DecValTok{5}\SpecialCharTok{*}\NormalTok{(}\FunctionTok{ncol}\NormalTok{(trainx)}\SpecialCharTok{+}\DecValTok{1}\NormalTok{)}\SpecialCharTok{+}\DecValTok{5}\SpecialCharTok{+}\DecValTok{1}\NormalTok{)}
+\NormalTok{nnet.p}\OtherTok{\textless{}{-}}\FunctionTok{predict}\NormalTok{(nnet,testx)}
+\NormalTok{nnet.rmse}\OtherTok{\textless{}{-}}\FunctionTok{RMSE}\NormalTok{(nnet.p,testy)}
+
+\CommentTok{\#MARS}
+\NormalTok{marsgrid }\OtherTok{\textless{}{-}} \FunctionTok{expand.grid}\NormalTok{(}\AttributeTok{.degree=}\DecValTok{1}\SpecialCharTok{:}\DecValTok{2}\NormalTok{,}\AttributeTok{.nprune=}\DecValTok{2}\SpecialCharTok{:}\DecValTok{38}\NormalTok{)}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{100}\NormalTok{)}
+\NormalTok{mars.t }\OtherTok{\textless{}{-}} \FunctionTok{train}\NormalTok{(trainx,trainy,}\AttributeTok{method=}\StringTok{"earth"}\NormalTok{,}\AttributeTok{tuneGrid=}\NormalTok{marsgrid,}\AttributeTok{trControl=}\FunctionTok{trainControl}\NormalTok{(}\AttributeTok{method=}\StringTok{"cv"}\NormalTok{))}
+\NormalTok{mars.p }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(mars.t,testx)}
+\NormalTok{mars.rmse}\OtherTok{\textless{}{-}}\FunctionTok{RMSE}\NormalTok{(mars.p,testy)}
+
+
+\FunctionTok{print}\NormalTok{(}\FunctionTok{paste}\NormalTok{(}\StringTok{"SVM"}\NormalTok{,svm.rmse))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "SVM 0.984948379124365"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(}\FunctionTok{paste}\NormalTok{(}\StringTok{"MARS"}\NormalTok{,mars.rmse))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "MARS 1.04743569857994"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(}\FunctionTok{paste}\NormalTok{(}\StringTok{"nnet"}\NormalTok{,nnet.rmse))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "nnet 0.996321573653602"
+\end{verbatim}
+
+Our SVM model performed the best with a test RMSE of 0.984 and the
+following training RMSE of 1.21:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(svmRtuned)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Support Vector Machines with Radial Basis Function Kernel 
+## 
+## 144 samples
+##  56 predictor
+## 
+## Pre-processing: centered (56), scaled (56) 
+## Resampling: Cross-Validated (10 fold) 
+## Summary of sample sizes: 129, 130, 130, 130, 130, 130, ... 
+## Resampling results across tuning parameters:
+## 
+##   C     RMSE      Rsquared   MAE      
+##   0.25  1.452999  0.4649044  1.1709934
+##   0.50  1.340040  0.5278748  1.0673606
+##   1.00  1.212608  0.6005815  0.9576347
+## 
+## Tuning parameter 'sigma' was held constant at a value of 0.02358453
+## RMSE was used to select the optimal model using the smallest value.
+## The final values used for the model were sigma = 0.02358453 and C = 1.
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Which predictors are most important in the optimal nonlinear
+  regression model? Do either the biological or process variables
+  dominate the list? How do the top ten important predictors compare to
+  the top ten predictors from the optimal linear model?
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{imp }\OtherTok{=} \FunctionTok{varImp}\NormalTok{(svmRtuned)}\SpecialCharTok{$}\NormalTok{importance}
+\end{Highlighting}
+\end{Shaded}
+
+The most important predictors are (in order): ManufacturingProcess32
+ManufacturingProcess13 BiologicalMaterial06 BiologicalMaterial03
+ManufacturingProcess17 BiologicalMaterial12 ManufacturingProcess09
+BiologicalMaterial02 ManufacturingProcess06 ManufacturingProcess31
+
+Manufacturing appears to dominate.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#construct an optimal linear model}
+\FunctionTok{library}\NormalTok{(glmnet)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'glmnet' was built under R version 4.0.5
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: Matrix
+\end{verbatim}
+
+\begin{verbatim}
+## Loaded glmnet 4.1-1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{require}\NormalTok{(caret)}
+\CommentTok{\#perform k{-}fold cross{-}validation to find optimal lambda value}
+\NormalTok{cv\_model }\OtherTok{\textless{}{-}} \FunctionTok{cv.glmnet}\NormalTok{(}\FunctionTok{as.matrix}\NormalTok{(trainx), trainy, }\AttributeTok{alpha =} \FloatTok{0.5}\NormalTok{)}
+
+\CommentTok{\#find optimal lambda value that minimizes test MSE}
+\NormalTok{best\_lambda }\OtherTok{\textless{}{-}}\NormalTok{ cv\_model}\SpecialCharTok{$}\NormalTok{lambda.min}
+\NormalTok{best\_model }\OtherTok{\textless{}{-}} \FunctionTok{glmnet}\NormalTok{(}\FunctionTok{as.matrix}\NormalTok{(trainx), trainy, }\AttributeTok{alpha =} \FloatTok{0.5}\NormalTok{, }\AttributeTok{lambda =}\NormalTok{ best\_lambda)}
+\NormalTok{lasso }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(best\_model, }\AttributeTok{s =}\NormalTok{ best\_lambda, }\AttributeTok{newx =} \FunctionTok{as.matrix}\NormalTok{(testx))}
+\NormalTok{lasso.rmse }\OtherTok{\textless{}{-}} \FunctionTok{RMSE}\NormalTok{(lasso,testy)}
+
+\NormalTok{lasso.imp }\OtherTok{=} \FunctionTok{varImp}\NormalTok{(best\_model,best\_model}\SpecialCharTok{$}\NormalTok{lambda) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{subset}\NormalTok{(Overall }\SpecialCharTok{\textgreater{}} \DecValTok{0}\NormalTok{) }
+\NormalTok{lasso.imp }\OtherTok{=} 
+\FunctionTok{print}\NormalTok{(}\FunctionTok{head}\NormalTok{(lasso.imp,}\AttributeTok{n=}\DecValTok{10}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                           Overall
+## BiologicalMaterial03   0.01423861
+## BiologicalMaterial06   0.09731297
+## ManufacturingProcess09 0.36042005
+## ManufacturingProcess13 0.21886294
+## ManufacturingProcess15 0.01977422
+## ManufacturingProcess17 0.21249807
+## ManufacturingProcess32 0.81874937
+## ManufacturingProcess33 0.04338854
+## ManufacturingProcess36 0.01087368
+## ManufacturingProcess37 0.04999779
+\end{verbatim}
+
+In the instance of our Lasso model, manufacturing also dominates but at
+a slightly higher rate.
+
+\begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Explore the relationships between the top predictors and the response
+  for the predictors that are unique to the optimal nonlinear regression
+  model. Do these plots reveal intuition about the biological or process
+  predictors and their relationship with yield?
+\end{enumerate}
+
+Unique predictors to the nonlinear model:
+
+BiologicalMaterial12 ManufacturingProcess09 BiologicalMaterial02
+ManufacturingProcess06 ManufacturingProcess31
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{unique.p }\OtherTok{=} \FunctionTok{subset}\NormalTok{(trainx,}\AttributeTok{select=}\FunctionTok{c}\NormalTok{(BiologicalMaterial12,ManufacturingProcess09,BiologicalMaterial02,ManufacturingProcess06,ManufacturingProcess31))}
+\NormalTok{unique.p}\SpecialCharTok{$}\NormalTok{yield }\OtherTok{=}\NormalTok{ trainy}
+
+\FunctionTok{cor}\NormalTok{(unique.p)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                        BiologicalMaterial12 ManufacturingProcess09
+## BiologicalMaterial12             1.00000000              0.2211858
+## ManufacturingProcess09           0.22118585              1.0000000
+## BiologicalMaterial02             0.78948338              0.1677067
+## ManufacturingProcess06           0.14128234              0.2151233
+## ManufacturingProcess31          -0.04100431             -0.2522044
+## yield                            0.35369877              0.4775427
+##                        BiologicalMaterial02 ManufacturingProcess06
+## BiologicalMaterial12             0.78948338             0.14128234
+## ManufacturingProcess09           0.16770673             0.21512334
+## BiologicalMaterial02             1.00000000             0.12964602
+## ManufacturingProcess06           0.12964602             1.00000000
+## ManufacturingProcess31          -0.09333995            -0.03050484
+## yield                            0.44517169             0.14195375
+##                        ManufacturingProcess31        yield
+## BiologicalMaterial12             -0.041004311  0.353698768
+## ManufacturingProcess09           -0.252204422  0.477542656
+## BiologicalMaterial02             -0.093339953  0.445171693
+## ManufacturingProcess06           -0.030504840  0.141953750
+## ManufacturingProcess31            1.000000000 -0.006102568
+## yield                            -0.006102568  1.000000000
+\end{verbatim}
+
+None of the unique predictors seem to suggest any strong visible
+correlation with the Yield variable separately, with the highest
+correlation only going into the 40th percentile.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  (15 points) Recreate the simulated data as shown below:
+\end{enumerate}
+
+\begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\tightlist
+\item
+  Fit a random forest model to all of the predictors, then estimate the
+  variable importance scores:
+\end{enumerate}
+
+Did the random forest model significantly use the uninformative
+predictors (V6 -- V10)?
+
+For this problem, you will perform your analysis in R.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(mlbench)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'mlbench' was built under R version 4.0.5
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{200}\NormalTok{)}
+\NormalTok{simulated }\OtherTok{\textless{}{-}} \FunctionTok{mlbench.friedman1}\NormalTok{(}\DecValTok{200}\NormalTok{, }\AttributeTok{sd =} \DecValTok{1}\NormalTok{) }
+\NormalTok{simulated }\OtherTok{\textless{}{-}} \FunctionTok{cbind}\NormalTok{(simulated}\SpecialCharTok{$}\NormalTok{x, simulated}\SpecialCharTok{$}\NormalTok{y)}
+\NormalTok{simulated }\OtherTok{\textless{}{-}} \FunctionTok{as.data.frame}\NormalTok{(simulated)}
+\FunctionTok{colnames}\NormalTok{(simulated)[}\FunctionTok{ncol}\NormalTok{(simulated)] }\OtherTok{\textless{}{-}} \StringTok{"y"}
+
+\FunctionTok{library}\NormalTok{(randomForest)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## randomForest 4.6-14
+\end{verbatim}
+
+\begin{verbatim}
+## Type rfNews() to see new features/changes/bug fixes.
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'randomForest'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:dplyr':
+## 
+##     combine
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:ggplot2':
+## 
+##     margin
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(caret)}
+\NormalTok{model1 }\OtherTok{\textless{}{-}} \FunctionTok{randomForest}\NormalTok{(y }\SpecialCharTok{\textasciitilde{}}\NormalTok{ ., }\AttributeTok{data =}\NormalTok{ simulated, }\AttributeTok{importance =} \ConstantTok{TRUE}\NormalTok{,}
+\AttributeTok{ntree =} \DecValTok{1000}\NormalTok{) }
+\NormalTok{rfImp1 }\OtherTok{\textless{}{-}} \FunctionTok{varImp}\NormalTok{(model1, }\AttributeTok{scale =} \ConstantTok{FALSE}\NormalTok{)}
+\FunctionTok{print}\NormalTok{(rfImp1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##          Overall
+## V1   8.732235404
+## V2   6.415369387
+## V3   0.763591825
+## V4   7.615118809
+## V5   2.023524577
+## V6   0.165111172
+## V7  -0.005961659
+## V8  -0.166362581
+## V9  -0.095292651
+## V10 -0.074944788
+\end{verbatim}
+
+The model did not significantly use V6-V10 compared to the other
+predictors.
+
+\begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Now add an additional predictor that is highly correlated with one of
+  the informative predictors. For example:
+  simulated\(duplicate1 <- simulated\)V1 + rnorm(200) * .1
+  \textgreater{} cor(simulated\(duplicate1, simulated\)V1) Fit another
+  random forest model to these data. Did the importance score for V1
+  change? What happens when you add another predictor that is also
+  highly correlated with V1?
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{simulated}\SpecialCharTok{$}\NormalTok{dup1 }\OtherTok{\textless{}{-}}\NormalTok{ simulated}\SpecialCharTok{$}\NormalTok{V1 }\SpecialCharTok{+} \FunctionTok{rnorm}\NormalTok{(}\DecValTok{200}\NormalTok{) }\SpecialCharTok{*} \FloatTok{0.1}
+\CommentTok{\#sanity check}
+\FunctionTok{cor}\NormalTok{(simulated}\SpecialCharTok{$}\NormalTok{V1,simulated}\SpecialCharTok{$}\NormalTok{dup1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.9460206
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#refit}
+\NormalTok{model1 }\OtherTok{\textless{}{-}} \FunctionTok{randomForest}\NormalTok{(y }\SpecialCharTok{\textasciitilde{}}\NormalTok{ ., }\AttributeTok{data =}\NormalTok{ simulated, }\AttributeTok{importance =} \ConstantTok{TRUE}\NormalTok{,}
+\AttributeTok{ntree =} \DecValTok{1000}\NormalTok{) }
+\NormalTok{rfImp1 }\OtherTok{\textless{}{-}} \FunctionTok{varImp}\NormalTok{(model1, }\AttributeTok{scale =} \ConstantTok{FALSE}\NormalTok{)}
+
+\FunctionTok{print}\NormalTok{(rfImp1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##          Overall
+## V1    5.69119973
+## V2    6.06896061
+## V3    0.62970218
+## V4    7.04752238
+## V5    1.87238438
+## V6    0.13569065
+## V7   -0.01345645
+## V8   -0.04370565
+## V9    0.00840438
+## V10   0.02894814
+## dup1  4.28331581
+\end{verbatim}
+
+V1 dropped in importance while the dup1 variable took on a similar
+overall value. When we add another predictor, all three colinear
+predictors drop in value, with V1 having the highest magnitude and Dup1
+havingthe second highest.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{simulated}\SpecialCharTok{$}\NormalTok{dup2 }\OtherTok{\textless{}{-}}\NormalTok{ simulated}\SpecialCharTok{$}\NormalTok{V1 }\SpecialCharTok{+} \FunctionTok{rnorm}\NormalTok{(}\DecValTok{200}\NormalTok{) }\SpecialCharTok{*} \FloatTok{0.1}
+\CommentTok{\#refit}
+\NormalTok{model1 }\OtherTok{\textless{}{-}} \FunctionTok{randomForest}\NormalTok{(y }\SpecialCharTok{\textasciitilde{}}\NormalTok{ ., }\AttributeTok{data =}\NormalTok{ simulated, }\AttributeTok{importance =} \ConstantTok{TRUE}\NormalTok{,}
+\AttributeTok{ntree =} \DecValTok{1000}\NormalTok{) }
+\NormalTok{rfImp1 }\OtherTok{\textless{}{-}} \FunctionTok{varImp}\NormalTok{(model1, }\AttributeTok{scale =} \ConstantTok{FALSE}\NormalTok{)}
+
+\FunctionTok{print}\NormalTok{(rfImp1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##          Overall
+## V1    4.91687329
+## V2    6.52816504
+## V3    0.58711552
+## V4    7.04870917
+## V5    2.03115561
+## V6    0.14213148
+## V7    0.10991985
+## V8   -0.08405687
+## V9   -0.01075028
+## V10   0.09230576
+## dup1  3.80068234
+## dup2  1.87721959
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  (15 points) Use a simulation to show tree bias with different
+  granularities. For this problem, you will perform your analysis in R.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{require}\NormalTok{(rpart)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: rpart
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(mlbench)}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{200}\NormalTok{)}
+\NormalTok{simulated }\OtherTok{\textless{}{-}} \FunctionTok{mlbench.friedman1}\NormalTok{(}\DecValTok{300}\NormalTok{, }\AttributeTok{sd =} \DecValTok{1}\NormalTok{) }
+\NormalTok{simulated }\OtherTok{\textless{}{-}} \FunctionTok{cbind}\NormalTok{(simulated}\SpecialCharTok{$}\NormalTok{x, simulated}\SpecialCharTok{$}\NormalTok{y)}
+\NormalTok{simulated }\OtherTok{\textless{}{-}} \FunctionTok{as.data.frame}\NormalTok{(simulated)}
+\FunctionTok{colnames}\NormalTok{(simulated)[}\FunctionTok{ncol}\NormalTok{(simulated)] }\OtherTok{\textless{}{-}} \StringTok{"y"}
+
+\NormalTok{trainingRows }\OtherTok{\textless{}{-}} \FunctionTok{createDataPartition}\NormalTok{(simulated}\SpecialCharTok{$}\NormalTok{y,}\AttributeTok{p =} \FloatTok{0.80}\NormalTok{, }\AttributeTok{list=}\ConstantTok{FALSE}\NormalTok{)}
+\NormalTok{train }\OtherTok{\textless{}{-}}\NormalTok{ simulated[trainingRows,]}
+\NormalTok{test  }\OtherTok{\textless{}{-}}\NormalTok{ simulated[}\SpecialCharTok{{-}}\NormalTok{trainingRows,]}
+
+\NormalTok{trees.rmse }\OtherTok{=} \FunctionTok{c}\NormalTok{()}
+
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{10}\NormalTok{))\{}
+\NormalTok{  rpartTree }\OtherTok{\textless{}{-}} \FunctionTok{rpart}\NormalTok{(y }\SpecialCharTok{\textasciitilde{}}\NormalTok{ ., }\AttributeTok{data =} \FunctionTok{as.data.frame}\NormalTok{(train),}\AttributeTok{maxdepth=}\NormalTok{i)}
+\NormalTok{  tree.p }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(rpartTree,}\FunctionTok{subset}\NormalTok{(test,}\AttributeTok{select=}\SpecialCharTok{{-}}\FunctionTok{c}\NormalTok{(y)))}
+\NormalTok{  trees.rmse }\OtherTok{\textless{}{-}} \FunctionTok{cbind}\NormalTok{(trees.rmse,}\FunctionTok{RMSE}\NormalTok{(tree.p,test}\SpecialCharTok{$}\NormalTok{y))}
+\NormalTok{\}}
+
+\FunctionTok{plot}\NormalTok{(}\AttributeTok{x=}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{10}\NormalTok{),}\AttributeTok{y=}\NormalTok{trees.rmse,}\AttributeTok{main=}\StringTok{"Depth vs. RMSE"}\NormalTok{,}\AttributeTok{type=}\StringTok{"o"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{mod4exercises_files/figure-latex/unnamed-chunk-19-1.pdf}
+6. (15 points) In stochastic gradient boosting, the bagging fraction and
+learning rate will govern the construction of the trees as they are
+guided by the gradient. Although the optimal values of these parameters
+should be obtained through the tuning process, it is helpful to
+understand how the magnitudes of these parameters affect magnitudes of
+variable importance. Figure 8.24 below provides the variable importance
+plots for boosting using two extreme values for the bagging fraction
+(0.1 and 0.9) and the learning rate (0.1 and 0.9) for the solubility
+data. The left-hand plot has both parameters set to 0.1, and the
+right-hand plot has both set to 0.9:
+
+\begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\tightlist
+\item
+  Why does the model on the right focus its importance on just the first
+  few of predictors, whereas the model on the left spreads importance
+  across more predictors?
+\end{enumerate}
+
+A higher learning rate means that the step size during our optimization
+process is larger - generally, a larger learning rate means that fewer
+iterations of tuning are required to construct a model. This, combined
+with the fact that 90\% of the training set is used in each bagging
+iteration, means that the model on the right is likely to pick up on the
+same signal across samples and terminate faster, leading it to favor a
+handful of predictors. The converse is true for the model on the left,
+which takes longer to fully propagate due to its learning rate, and
+because of the small bagging fraction, is likely to capture a variety of
+different signals.
+
+\begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\setcounter{enumi}{1}
+\item
+  Which model do you think would be more predictive of other samples?
+  The model on the left exhibits less bias the first few predictors, and
+  is less likely to underfit unknown data.
+\item
+  How would increasing interaction depth affect the slope of predictor
+  importance for either model in Fig. 8.24? A smaller learning rate
+  requires more iterations to properly develop a model - therefore, it's
+  likely that the slopes of certain predictors on the left are going to
+  increase in magnitude at a greater rate than of those on the right.
+\end{enumerate}
+
+\end{document}

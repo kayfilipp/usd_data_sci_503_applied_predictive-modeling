@@ -1,0 +1,259 @@
+---
+title: "Module 1 homework"
+author: "Filipp Krasovsky"
+date: "5/17/2021"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+setwd("C:/Users/13234/Documents/usd_data_sci/503_applied_predictve_modeling/mod1")
+```
+
+
+1.	(30 points) The UC Irvine Machine Learning Repository contains a data set related to glass identification. The data consist of 214 glass samples labeled as one of seven class categories. There are nine predictors, including the refractive index and percentages of eight elements: Na, Mg, Al, Si, K, Ca, Ba, and Fe. The data can be accessed via:
+library(mlbench)
+data(Glass)
+a.	Using visualizations, explore the predictor variables to understand their distributions as well as the relationships between predictors.
+b.	Do there appear to be any outliers in the data? Are any predictors skewed?
+c.	Are there any relevant transformations of one or more predictors that
+might improve the classification model?
+
+
+load in our dataset:
+```{r}
+library(mlbench)
+data(Glass)
+df = as.data.frame(Glass)
+predictors = subset(df,select=-c(Type))
+```
+
+
+part a: we can begin the visualization process by looking at a histogram of each predictor and their skewness values for validation.
+
+```{r message=FALSE, warning=FALSE}
+library(Hmisc) 
+hist.data.frame(predictors)
+```
+
+```{r}
+require(e1071)
+svals <- apply(predictors,2,skewness)
+print(svals)
+```
+Our findings validate that none of our predictors have a normal distribution, with many of our predictors being either right skewed or left skewed.
+In particular, RI, NA, AL, K, CA, BA, and FE  are right sekewed, with BA, CA, and K being the most skewed among these.
+Mg and Si are the left skewed predictors. Of all predictors Si and Na appear closest to having a normal distribution.
+
+To further substantiate the claim none of our distributions are normal, we can run the Shapiro-Wilks test, where the null hypothesis is that the distribution is normal.
+therefore, if our p-value is not greather than 0.05, we reject the null hypothesis in favor of the claim that the distribution isn't normal.
+```{r}
+for (i in names(predictors)){
+	pval <- shapiro.test(predictors[,i])[2]
+	result<-ifelse(pval >=0.05,"Normal","Not Normal")
+	print(paste("shapiro test for:",i,"=",result,"pvalue:",pval))
+}
+
+```
+Next, we can examine the relationship between predictors.
+First, we start with a heat-cluster correlogram:
+
+```{r}
+#a. visualize. 
+require(corrplot)
+#extract predictors into correlogram 
+predictors.cor = cor(predictors)
+corrplot(predictors.cor,order="hclust")
+
+```
+
+Face value observation suggests a mildly strong relationship between SI and RI, RI and CA, AL and BA, Mg and Al, Mg and Ba, and Ca and MG.
+We may have to conduct PCA in order to reduce dimensionality and capture the variance between these predictors in our modeling.
+
+For more detail, let's define a strong correlation as any value over 0.4. In that instance, we find the following relationships to be significant:
+(RI,AL)
+(RI,SI)
+(RI,SA)
+(MG,AL)
+(MG,CA)
+(MG,BA)
+(AL,BA)
+
+We substantiate this with the matrix below:
+
+```{r}
+#we can also pick a threshold such as 0.4 to decide if we have a colinearity issue.
+#potentially problematic areas: RI->AL, RI->SI, RI->CA 
+#								MG->AL, MG->CA, MG->BA
+#								AL->BA 
+
+thresh_cors = ifelse(abs(predictors.cor)>=0.4,1,0)
+print(thresh_cors) 
+```
+
+(b) Are any predictors skewed? Are there any outliers?
+
+(see skewness output above)
+
+Our findings validate that none of our predictors have a normal distribution, with many of our predictors being either right skewed or left skewed.
+In particular, RI, NA, AL, K, CA, BA, and FE  are right sekewed, with BA, CA, and K being the most skewed among these.
+Mg and Si are the left skewed predictors. Of all predictors Si and Na appear closest to having a normal distribution.
+
+We can find out if our data has outliers by plotting a box-plot for each of our predictors.
+Since Si is on a much higher magnitude than all other predictors, we isolate it for more insight.
+
+```{r}
+boxplot(predictors$Si)
+boxplot(subset(predictors,select=-c(Si)))
+```
+Si, Na, Al, K, Ca, and Ba all have considerable a,ounts of outliers.
+
+c.	Are there any relevant transformations of one or more predictors that
+might improve the classification model?
+
+for this, we look to the box-cox transformation module in R to determine what transformation we should apply for each predictors.
+
+```{r}
+#(b^lambda)-1)/ lambda 
+require(caret)
+for ( i in names(predictors)){
+  
+  x = BoxCoxTrans(predictors[,i])
+  print(paste(i,",power to raise to:",x$lambda))
+  
+}
+```
+Thus far, we know that the following transformations can help us:
+1. raising NA to the power of -2 
+2. raising NA to the power of -.1
+3. square root transformation for Al 
+4. Squaring Si 
+5. Raising Ca to the power of -1.1
+
+this leaves us with four nulls: Mg, K, Ba, and Fe - for which there may be a transformation, but it's not clear what kind. 
+Ba, Fa, and K are heavily right-skewed, so much so that a lambda transformation may be infeasible. 
+we can modify this by adding a very small amount to each zero in our dataset. 
+
+```{r}
+for (i in names(predictors)){
+  
+  predictors[,i] = ifelse(predictors[,i]==0,0.00000001,predictors[,i])
+  
+}
+```
+
+
+```{r}
+p<- preProcess(predictors,method='BoxCox')
+predictors.t <- predict(p,predictors)
+svals.t <- apply(predictors.t,2,skewness)
+print(svals.t)
+print(svals)
+
+```
+
+As demonstrated, our Box-Cox transformation significantly reduces skewness for our predictors.
+We can create a histogram for validation:
+
+```{r}
+hist.data.frame(predictors.t)
+```
+While some predictors remain heavily skewed, we did significantly reduce skewness for others.
+
+
+2.	(20 points) The image below shows a scatter plot matrix of the continuous features of a dataset. Discuss the relationships between the features in the dataset that this scatter plot highlights.
+
+Life expectancy and infant mortality seem to show a strong negative correlation. 
+Education and life expectancy do not seem to have any linear relationship, but it could be argue that a polynomial relationship can be tested for.
+Life expectancy and health also seem to share a nonlinear relationship, as do infant mortality and health. 
+Health USD exhibits a similar trend with life expectancy, and possibly has a negative nonlinear relationship with infant mortality.
+
+3.	(10 points) Discuss the relationships shown in each visualizations:
+a.	The visualization below illustrates the relationship between Diastolic BP & Tachycardia, left most plot has data where Tachycardia = true & false.
+
+Tachycardia is defined as a condition where the heart rate increases rapidly when sitting up or standing, which we assume can manifest itself in higher values 
+of the Dialostic BP in this dataset. True enough, the distribution for DBP = false is contained primarily within the 60-120 range, while the distribution for 
+individuals with Tachycardia extends well past 120 into the 150 range.
+
+b.	The visualization below illustrates the relationship between height  & Tachycardia, left most plot has data where Tachycardia = true & false.
+
+the most apparently visual takeaway is that the distribution for individuals  with tachycardia tends to be more left skewed, while the opposite is true for regular individuals.
+this is intuitive given that the proclivity for having a larger height is consistent with the problems that would cause massive fluctuations in blood pressure, so taller individuals are more prone 
+to tachycardia.
+
+4.	(30 points) Use the data at the UCI Machine Learning Repository web page (or download the “hcvdat0.csv” file in Blackboard) and pick the numeric predictors (exclude columns X & Age) to perform the following analysis in R: 
+a.	Are there any missing data in the predictors? If yes, summarize the missing data by each predictor.
+b.	Are there any predictors with skewed distributions? 
+c.	Plot histograms of all predictors to observe skewness visually
+d.	Compute skewness using the skewness function from the e1071 package.
+e.	Apply box cox transformations to the data then recompute the skewness metrics and report the differences and does box cox transformation help?
+f.	Plot histograms of transformed predictors to observe changes to skewness visually.
+
+```{r}
+
+#load in our dataset 
+df = read.csv("hcvdat0.csv",TRUE)
+df = subset(df,select=-c(X))
+
+#check for missing values 
+missing_values = df[rowSums(is.na(df)) > 0, ]  
+print(nrow(missing_values))
+
+for ( i in names(missing_values)){
+  print(
+    paste(i,
+          (nrow(subset(missing_values,is.na(missing_values[,i]))))
+    )
+  )
+}
+```
+We have 26 missing values in total, broken down by the predictors above.
+
+(b) to find predictors with skewed distributions, we can plot each predictor and look at their skewneess.
+(c) [this also involves plotting the histograms.]
+
+```{r}
+predictors = subset(df,select=-c(Category,Sex))
+hist.data.frame(predictors)
+```
+Age appears to be bimodal and skewed. AST, ALT, ALP, BIL, CREA, and GGT are visibly right skewed.
+PROT is somewhat left skewed.
+
+(d) Compute Skewness:
+
+```{r}
+svals <- apply(predictors,2,na.rm=TRUE,skewness)
+svals
+```
+
+Overall, we find that age, ALB, and CHE are all relatively close to normal distribution.
+ALP, ALT, AST, BIL, CREA, and GGT are heavily right skewed.
+PROT is left skewed.
+
+(e)	Apply box cox transformations to the data then recompute the skewness metrics and report the differences and does box cox transformation help?
+
+```{r}
+p<- preProcess(predictors,method='BoxCox')
+predictors.t <- predict(p,predictors)
+svals.t <- apply(predictors.t,2,na.rm=TRUE,skewness)
+print(svals.t)
+print(svals)
+```
+Applying the boxcox transformation considerably reduces the skewness of almost all of our predictors, while increasing it for others (ie CHE).
+
+(f)	Plot histograms of transformed predictors to observe changes to skewness visually.
+
+```{r}
+hist.data.frame(predictors.t)
+```
+Overall, we can  visually confirm notable improvements in skew.
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,450 @@
+---
+title: "Module 4 exercises"
+author: "Filipp Krasovsky"
+date: "6/7/2021"
+output:
+  word_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+require(caret)
+require(dplyr)
+```
+
+
+1.	(15 points) Simulate a single predictor and a nonlinear relationship, such as a sin wave shown in Fig. 7.7 of textbook, and investigate the relationship between the cost, 𝜺, and kernel parameters for a support vector machine model:
+
+
+## Create a grid of x values to use for prediction > dataGrid <- data.frame(x = seq(2, 10, length = 100)). 
+
+```{r}
+#training data
+set.seed(100)
+x<-runif(100,min=2,max=10)
+y<-sin(x)+rnorm(length(x)) * 0.25
+sinData<-data.frame(x=x,y=y)
+plot(x,y,main = "Training values")
+
+#prediction data 
+x_test <- data.frame(x=seq(2,10,length=100))
+y_test <- sin(x_test)+rnorm(length(x_test))* 0.25
+```
+
+
+(a) Fit different models using a radial basis function and different values of the cost (the C parameter) and 𝜺. Plot the fitted curve. For example:
+library(kernlab)
+rbfSVM <- ksvm(x = x, y = y, data = sinData,
+kernel ="rbfdot", kpar = "automatic",
+C = 1, epsilon = 0.1)
+modelPrediction <- predict(rbfSVM, newdata = dataGrid)
+
+We start with a cost param of 1 and an epsilon of 0.1.
+
+```{r}
+#use the ksvm model for svm with rbfdot as our kernel method.
+require(kernlab)
+set.seed(100)
+svm <- ksvm(x=x,y=y,data=sinData,kernel="rbfdot",kpar="automatic",C=1,epsilon=0.1)
+svm.p<-predict(svm,newdata=x_test)
+plot(x = svm.p, y = y_test$x,main=paste("C: 1, Eps = 0.1, RMSE:",round(RMSE(svm.p,y_test$x),3)))
+```
+
+We move on to an epsilon of 0.075 and a cost param of 1:
+
+```{r}
+#use the ksvm model for svm with rbfdot as our kernel method.
+set.seed(100)
+svm <- ksvm(x=x,y=y,data=sinData,kernel="rbfdot",kpar="automatic",C=1,epsilon=0.075)
+svm.p<-predict(svm,newdata=x_test)
+plot(x = svm.p, y = y_test$x,main=paste("C: 1, Eps = 0.075, RMSE:",round(RMSE(svm.p,y_test$x),3)))
+```
+It appears decreasing out epsilon slightly drops our performance.
+We move on to an epsilon of 0.125 and a cost param of 1:
+
+```{r}
+#use the ksvm model for svm with rbfdot as our kernel method.
+set.seed(100)
+svm <- ksvm(x=x,y=y,data=sinData,kernel="rbfdot",kpar="automatic",C=1,epsilon=0.125)
+svm.p<-predict(svm,newdata=x_test)
+plot(x = svm.p, y = y_test$x,main=paste("C: 1, Eps = 0.125, RMSE:",round(RMSE(svm.p,y_test$x),3)))
+```
+For boundary testing the cost parameter, we can scale C across 0.75 and 1.25 as an exercise, hosting epsilon constant at 0.1.
+As an extreme boundary, we can set cost to near zero and five as well.
+
+```{r}
+#use the ksvm model for svm with rbfdot as our kernel method.
+par(mfrow=c(2,2))
+set.seed(100)
+svm <- ksvm(x=x,y=y,data=sinData,kernel="rbfdot",kpar="automatic",C=0.75,epsilon=0.1)
+svm.p<-predict(svm,newdata=x_test)
+plot(x = svm.p, y = y_test$x,main=paste("C: 0.75, Eps = 0.1, RMSE:",round(RMSE(svm.p,y_test$x),3)))
+
+set.seed(100)
+svm <- ksvm(x=x,y=y,data=sinData,kernel="rbfdot",kpar="automatic",C=1.25,epsilon=0.1)
+svm.p<-predict(svm,newdata=x_test)
+plot(x = svm.p, y = y_test$x,main=paste("C: 1.25, Eps = 0.1, RMSE:",round(RMSE(svm.p,y_test$x),3)))
+
+set.seed(100)
+svm <- ksvm(x=x,y=y,data=sinData,kernel="rbfdot",kpar="automatic",C=0.001,epsilon=0.1)
+svm.p<-predict(svm,newdata=x_test)
+plot(x = svm.p, y = y_test$x,main=paste("C: ~0, Eps = 0.1, RMSE:",round(RMSE(svm.p,y_test$x),3)))
+
+set.seed(100)
+svm <- ksvm(x=x,y=y,data=sinData,kernel="rbfdot",kpar="automatic",C=5,epsilon=0.1)
+svm.p<-predict(svm,newdata=x_test)
+plot(x = svm.p, y = y_test$x,main=paste("C: 5, Eps = 0.1, RMSE:",round(RMSE(svm.p,y_test$x),3)))
+```
+On face value, it appears that increasing the cost parameter is associated with an increase in RMSE, with diminishing 
+marginal returns. Near zero cost parameters induce a much larger RMSE, while higher C-values decrease performance as well.
+
+(b) The σ parameter can be adjusted using the kpar argument, such as kpar = list(sigma = 1). Try different values of σ to understand how this parameter changes the model fit. How do the cost, 𝜺, and σ values affect the model?
+
+
+We know, as a rule, that higher values of sigma make the model more flexible because errors tend to get amplified, but lower values make the model "stiffen", leading to underfitting. 
+
+```{r}
+sigma_frame = seq(from = 0.1, to = 4, by = 0.1)
+results = data.frame(Sigma=character(),RMSE=double())
+
+for (i in sigma_frame){
+  set.seed(100)
+  svm <- ksvm(x=x,y=y,data=sinData,kernel="rbfdot",kpar=list(sigma=i),C=1,epsilon=0.1)
+  svm.p<-predict(svm,newdata=x_test)
+  this.result <- data.frame(i,RMSE(svm.p,y_test$x))
+  results = rbind(results,this.result)
+}
+
+names(results) = c("Sigma","RMSE")
+
+plot(results,type="o",main="Sigma vs. RMSE")
+```
+Overall, it seems that increasing sigma beyond 1 tends to produce an increase in error rates,with the optimal value lying between zero and one. Similarly, increasing the epsilon parameter increases the threshold at which data points become relevant to modeling given that SVM is epsilon-insensitive. Using an epsilon that is too high makes the model dependent on points with radically low fit, this failing to generalize to outside data.
+
+2.	(15 points) For the Tecator data described in chapter 6 of the textbook, build SVM, neural network, MARS, and KNN models. Since neural networks are especially sensitive to highly correlated predictors, does pre-processing using PCA help the model?
+For this problem, you will perform your analysis in R. 
+
+Because the textbook frames the data question as modeling the  relationship to fat, we use column 2 of the endpoints set.
+
+```{r}
+#load data - absorp is the predictor set and endpoints are the response set(s).
+library(caret)
+data(tecator)
+require(nnet)
+require(earth)
+```
+
+
+```{r}
+#without PCA 
+x = as.data.frame(absorp)
+y = as.data.frame(endpoints[,2])
+x.p = preProcess(x,method = c("center","scale"))
+x = predict(x.p,x)
+
+names(y) = 'fat'
+
+set.seed(1)
+trainingRows <- createDataPartition(y$fat,p = 0.80, list=FALSE)
+
+trainx<- x[trainingRows,]
+trainy<- y[trainingRows,]
+testx <- x[-trainingRows,]
+testy <- y[-trainingRows,]
+
+
+
+#SVM
+set.seed(100)
+svmRtuned <- train((trainx),(trainy),method="svmRadial",preProc = c("center","scale"),tunelength=14,
+                   trControl = trainControl(method="cv"))
+svm.p <- predict(svmRtuned$finalModel,testx)
+svm.rmse<-RMSE(svm.p,testy)
+print(paste("SVM",svm.rmse))
+
+#NN
+set.seed(100)
+nnet <- avNNet(trainx,trainy,size=5,decay=0.01,repeats=5,linout=TRUE,trace=FALSE,maxit=500,maxNwts=5*(ncol(trainx)+1)+5+1)
+nnet.p<-predict(nnet,testx)
+nnet.rmse<-RMSE(nnet.p,testy)
+print(paste("nnet",nnet.rmse))
+
+#MARS
+marsgrid <- expand.grid(.degree=1:2,.nprune=2:38)
+set.seed(100)
+mars.t <- train(trainx,trainy,method="earth",tuneGrid=marsgrid,trControl=trainControl(method="cv"))
+mars.p <- predict(mars.t,testx)
+mars.rmse<-RMSE(mars.p,testy)
+print(paste("MARS",mars.rmse))
+
+#KNN - remove unbalanced first.
+knnDescr <- trainx[,-nearZeroVar(trainx)]
+knntune  <- train(knnDescr,trainy,method="knn",tuneGrid=data.frame(.k=1:20),trControl=trainControl(method="cv"))
+knn.p <-predict(knntune,testx)
+knn.rmse<-RMSE(knn.p,testy)
+print(paste("KNN",knn.rmse))
+
+#NN with PCA 
+x = as.data.frame(absorp)
+y = as.data.frame(endpoints[,2])
+x.p = preProcess(x,method = c("center","scale","pca"))
+x = predict(x.p,x)
+
+names(y) = 'fat'
+
+set.seed(1)
+trainingRows <- createDataPartition(y$fat,p = 0.80, list=FALSE)
+
+trainx<- x[trainingRows,]
+trainy<- y[trainingRows,]
+testx <- x[-trainingRows,]
+testy <- y[-trainingRows,]
+
+#NN
+set.seed(100)
+nnet <- avNNet(trainx,trainy,size=5,decay=0.01,repeats=5,linout=TRUE,trace=FALSE,maxit=500,maxNwts=5*(ncol(trainx)+1)+5+1)
+nnet.p<-predict(nnet,testx)
+nnet.rmse<-RMSE(nnet.p,testy)
+print(paste("nnet w PCA",nnet.rmse))
+
+```
+
+PCA failed to improve our neural net.
+
+
+3) The matrix processPredictors contains the 57 predictors (12 describing the input biological material and 45 describing the process predictors) for the 176 manufacturing runs. yield contains the percent yield for each run. This describes the data for a chemical manufacturing process. Use data imputation, data splitting, and pre-processing steps and train several nonlinear regression models.
+
+(b) Which predictors are most important in the optimal nonlinear regression model? Do either the biological or process variables dominate the list? How do the top ten important predictors compare to the top ten predictors from the optimal linear model?
+(c) Explore the relationships between the top predictors and the response for the predictors that are unique to the optimal nonlinear regression model. Do these plots reveal intuition about the biological or process predictors and their relationship with yield?
+
+For this problem, you will perform your analysis in R. 
+
+```{r}
+#load data
+library(AppliedPredictiveModeling)
+data(ChemicalManufacturingProcess)
+
+#knn imputation
+require(Hmisc)
+x = (ChemicalManufacturingProcess)
+x = subset(x,select=-c(Yield))
+x = as.data.frame(x)
+x = Hmisc::impute(x)
+y  <-ChemicalManufacturingProcess$Yield %>% as.data.frame 
+
+#remove nzv 
+nzv = nearZeroVar(x)
+x = x[-nzv]
+
+#center, scale 
+x.cs <- preProcess(x,method=c("center","scale"))
+x = predict(x.cs,x)
+
+#partition
+set.seed(1)
+names(y)="yield"
+trainingRows <- createDataPartition(y$yield,p = 0.80, list=FALSE)
+
+trainx<- x[trainingRows,]
+trainy<- y[trainingRows,]
+testx <- x[-trainingRows,]
+testy <- y[-trainingRows,]
+
+```
+
+(a) Which nonlinear regression model gives the optimal resampling and test set performance?
+For this instance, we will use svm, nnet, and mars.
+```{r}
+#SVM
+set.seed(100)
+svmRtuned <- train((trainx),(trainy),method="svmRadial",preProc = c("center","scale"),tunelength=14,
+                   trControl = trainControl(method="cv"))
+svm.p <- predict(svmRtuned$finalModel,testx)
+svm.rmse<-RMSE(svm.p,testy)
+
+#NN
+set.seed(100)
+nnet <- avNNet(trainx,trainy,size=5,decay=0.01,repeats=5,linout=TRUE,trace=FALSE,maxit=500,maxNwts=5*(ncol(trainx)+1)+5+1)
+nnet.p<-predict(nnet,testx)
+nnet.rmse<-RMSE(nnet.p,testy)
+
+#MARS
+marsgrid <- expand.grid(.degree=1:2,.nprune=2:38)
+set.seed(100)
+mars.t <- train(trainx,trainy,method="earth",tuneGrid=marsgrid,trControl=trainControl(method="cv"))
+mars.p <- predict(mars.t,testx)
+mars.rmse<-RMSE(mars.p,testy)
+
+
+print(paste("SVM",svm.rmse))
+print(paste("MARS",mars.rmse))
+print(paste("nnet",nnet.rmse))
+
+```
+Our SVM model performed the best with a test RMSE of 0.984 and the following training RMSE of 1.21:
+
+```{r}
+print(svmRtuned)
+```
+(b) Which predictors are most important in the optimal nonlinear regression model? Do either the biological or process variables dominate the list? How do the top ten important predictors compare to the top ten predictors from the optimal linear model?
+
+```{r}
+imp = varImp(svmRtuned)$importance
+```
+
+The most important predictors are (in order):
+ManufacturingProcess32
+ManufacturingProcess13
+BiologicalMaterial06
+BiologicalMaterial03
+ManufacturingProcess17
+BiologicalMaterial12
+ManufacturingProcess09
+BiologicalMaterial02
+ManufacturingProcess06
+ManufacturingProcess31
+
+Manufacturing appears to dominate.
+
+```{r}
+#construct an optimal linear model
+library(glmnet)
+require(caret)
+#perform k-fold cross-validation to find optimal lambda value
+cv_model <- cv.glmnet(as.matrix(trainx), trainy, alpha = 0.5)
+
+#find optimal lambda value that minimizes test MSE
+best_lambda <- cv_model$lambda.min
+best_model <- glmnet(as.matrix(trainx), trainy, alpha = 0.5, lambda = best_lambda)
+lasso <- predict(best_model, s = best_lambda, newx = as.matrix(testx))
+lasso.rmse <- RMSE(lasso,testy)
+
+lasso.imp = varImp(best_model,best_model$lambda) %>% subset(Overall > 0) 
+lasso.imp = 
+print(head(lasso.imp,n=10))
+```
+In the instance of our Lasso model, manufacturing also dominates but at a slightly higher rate.
+
+(c) Explore the relationships between the top predictors and the response for the predictors that are unique to the optimal nonlinear regression model. Do these plots reveal intuition about the biological or process predictors and their relationship with yield?
+
+Unique predictors to the nonlinear model:
+
+BiologicalMaterial12
+ManufacturingProcess09
+BiologicalMaterial02
+ManufacturingProcess06
+ManufacturingProcess31
+
+```{r}
+unique.p = subset(trainx,select=c(BiologicalMaterial12,ManufacturingProcess09,BiologicalMaterial02,ManufacturingProcess06,ManufacturingProcess31))
+unique.p$yield = trainy
+
+cor(unique.p)
+```
+None of the unique predictors seem to suggest any strong visible correlation with the Yield variable separately, with the highest correlation only going into the 40th percentile.
+
+4.	(15 points) Recreate the simulated data as shown below:
+
+(a) Fit a random forest model to all of the predictors, then estimate the variable importance scores:
+
+Did the random forest model significantly use the uninformative predictors (V6 – V10)?
+
+For this problem, you will perform your analysis in R. 
+
+```{r}
+library(mlbench)
+set.seed(200)
+simulated <- mlbench.friedman1(200, sd = 1) 
+simulated <- cbind(simulated$x, simulated$y)
+simulated <- as.data.frame(simulated)
+colnames(simulated)[ncol(simulated)] <- "y"
+
+library(randomForest)
+library(caret)
+model1 <- randomForest(y ~ ., data = simulated, importance = TRUE,
+ntree = 1000) 
+rfImp1 <- varImp(model1, scale = FALSE)
+print(rfImp1)
+
+```
+
+The model did not significantly use V6-V10 compared to the other predictors.
+
+(b) Now add an additional predictor that is highly correlated with one of the informative predictors. For example:
+simulated$duplicate1 <- simulated$V1 + rnorm(200) * .1 > cor(simulated$duplicate1, simulated$V1)
+Fit another random forest model to these data. Did the importance score for V1 change? What happens when you add another predictor that is also highly correlated with V1?
+
+```{r}
+simulated$dup1 <- simulated$V1 + rnorm(200) * 0.1
+#sanity check
+cor(simulated$V1,simulated$dup1)
+```
+```{r}
+#refit
+model1 <- randomForest(y ~ ., data = simulated, importance = TRUE,
+ntree = 1000) 
+rfImp1 <- varImp(model1, scale = FALSE)
+
+print(rfImp1)
+
+```
+
+V1 dropped in importance while the dup1 variable took on a similar overall value.
+When we add another predictor, all three colinear predictors drop in value, with V1 having the highest magnitude and Dup1 havingthe second highest.
+
+```{r}
+simulated$dup2 <- simulated$V1 + rnorm(200) * 0.1
+#refit
+model1 <- randomForest(y ~ ., data = simulated, importance = TRUE,
+ntree = 1000) 
+rfImp1 <- varImp(model1, scale = FALSE)
+
+print(rfImp1)
+```
+
+5.	(15 points) Use a simulation to show tree bias with different granularities. For this problem, you will perform your analysis in R. 
+
+
+```{r}
+require(rpart)
+library(mlbench)
+set.seed(200)
+simulated <- mlbench.friedman1(300, sd = 1) 
+simulated <- cbind(simulated$x, simulated$y)
+simulated <- as.data.frame(simulated)
+colnames(simulated)[ncol(simulated)] <- "y"
+
+trainingRows <- createDataPartition(simulated$y,p = 0.80, list=FALSE)
+train <- simulated[trainingRows,]
+test  <- simulated[-trainingRows,]
+
+trees.rmse = c()
+
+for (i in c(1:10)){
+  rpartTree <- rpart(y ~ ., data = as.data.frame(train),maxdepth=i)
+  tree.p <- predict(rpartTree,subset(test,select=-c(y)))
+  trees.rmse <- cbind(trees.rmse,RMSE(tree.p,test$y))
+}
+
+plot(x=c(1:10),y=trees.rmse,main="Depth vs. RMSE",type="o")
+```
+6.	(15 points) In stochastic gradient boosting, the bagging fraction and learning rate will govern the construction of the trees as they are guided by the gradient. Although the optimal values of these parameters should be obtained through the tuning process, it is helpful to understand how the magnitudes of these parameters affect magnitudes of variable importance. Figure 8.24 below provides the variable importance plots for boosting using two extreme values for the bagging fraction (0.1 and 0.9) and the learning rate (0.1 and 0.9) for the solubility data. The left-hand plot has both parameters set to 0.1, and the right-hand plot has both set to 0.9:
+
+(a) Why does the model on the right focus its importance on just the first few of predictors, whereas the model on the left spreads importance across more predictors?
+
+A higher learning rate means that the step size during our optimization process is larger - generally, a larger learning rate means that fewer iterations of tuning are required to construct a model. This, combined with the fact that 90% of the training set is used in each bagging iteration, means that the model on the right is likely to pick up on the same signal across samples and terminate faster, leading it to favor a handful of predictors. The converse is true for the model on the left, which takes longer to fully propagate due to its learning rate, and because of the small bagging fraction, is likely to capture a variety of different signals.
+
+(b) Which model do you think would be more predictive of other samples? 
+The model on the left exhibits less bias the first few predictors, and is less likely to underfit unknown data.
+
+(c) How would increasing interaction depth affect the slope of predictor importance for either model in Fig. 8.24? 
+A smaller learning rate requires more iterations to properly develop a model - therefore, it's likely that the slopes of certain predictors on the left are going to increase in magnitude at a greater rate than of those on the right. 
+
+
+
+
+
+
+
+
